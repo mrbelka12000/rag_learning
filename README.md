@@ -25,4 +25,4 @@ pip install -r requirements.txt
 uvicorn main:app
 ```
 4. Go to https://localhost:8000/docs to check it out.
-5. Fell free to ask any information from provided documents.
+5. Fell free to ask any information from provided documents using "/answer" endpoint.
