@@ -11,18 +11,14 @@ from pydantic import BaseModel, Field
 import pandas as pd
 
 
-load_dotenv()
-
-
 from langchain_openai import ChatOpenAI
 llm = ChatOpenAI(model="gpt-4o-mini")
-
 
 loader = PyPDFLoader('Research Paper 2406.09647.pdf')
 pages = loader.load()
 
 splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1500, chunk_overlap=200, length_function=len, separators=["\n\n", "\n", " "])
+    chunk_size=500, chunk_overlap=50, length_function=len, separators=["\n\n", "\n", " "])
 chunks = splitter.split_documents(pages)
 
 
