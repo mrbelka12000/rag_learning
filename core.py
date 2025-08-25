@@ -6,7 +6,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-def run(path="data"):
+def run_vectorization(path="data"):
     onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
     pages = []
     for file in onlyfiles:

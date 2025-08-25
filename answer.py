@@ -19,9 +19,7 @@ don't know. DON'T MAKE UP ANYTHING.
 Answer the question based on the above context: {question}
 """
 
-    context_text = "\n\n---\n\n".join([doc.page_content for doc in relevant_chunks])
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
-    prompt = prompt_template.format(context=context_text, question=question)
 
     def format_doc(docs):
         return "\n\n".join([doc.page_content for doc in docs])
