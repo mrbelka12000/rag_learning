@@ -1,27 +1,29 @@
-from os.path import isfile, join
-from os import listdir
-from embedings import load_pdf, load_text, get_embedding_function, evaluate_embedding
+from os.path import isfile
+from embedings import load_pdf, load_text, load_docx
 from vectors import make_vectors
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 from typing import List
+import glob
 
 
 def run_vectorization(path="data"):
-    onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
+    only_files = glob.glob(f"{path}/**/*", recursive=True)
+    only_files = [f for f in only_files if isfile(f)]
+    print(f"Found {len(only_files)} files in {path}, {only_files}")
     pages: List[Document] = []
-    for file in onlyfiles:
-        fp = join(path, file)
+    for file in only_files:
+        fp = file
         if file.endswith(".pdf"):
             pages.extend(load_pdf(fp))
 
         elif file.endswith(".txt"):
             pages.extend(load_text(fp))
 
-        else:
-            print(f"Unsupported file format: {file}")
-    
+        elif file.endswith(".docx"):
+            pages.extend(load_docx(fp))
+
     if not pages:
         raise ValueError(f"No supported files found in {path}")
 
